@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Moment from 'react-moment';
 
 export const Region = ({
     region: { regionid, dnoregion, shortname, intensity }

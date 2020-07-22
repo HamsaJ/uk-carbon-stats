@@ -6,6 +6,7 @@ import { accessControlCors } from "../middleware/accessControlCors";
 import * as cors from "cors";
 import bodyParser = require("body-parser");
 import { graphQlSchema } from "../schema/schema";
+const path = require('path');
 
 const { graphqlHTTP } = require('express-graphql');
 /**
@@ -25,6 +26,12 @@ export class Server implements HttpServer {
               graphiql: true
             })
         )
+
+        this.server.use(express.static('public'));
+
+        this.server.get('*', (req, res) => {
+            res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+        })
         this.server.use(bodyParser.json({limit: '150mb'}));
         this.server.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
         CONTROLLERS.forEach(controller => controller.initialize(this));

@@ -49,7 +49,8 @@ export class CarbonData extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1 className="display-4 my-3">UK Carbon Data</h1>
+                <h2 className="display-4 my-3">UK Carbon Data for today</h2>
+                
                 <ColourCodes/>
                 <Query query={CARBON_DATA_QUERY}>
                     {
@@ -65,7 +66,6 @@ export class CarbonData extends Component {
                                 </div>
                               );
                             if (error) console.log(error);
-
                             return <React.Fragment>
                                 {
                                     data.RegionalCarbonData.data.map(data => (
