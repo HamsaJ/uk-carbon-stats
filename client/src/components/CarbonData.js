@@ -44,13 +44,21 @@ export class CarbonData extends Component {
         this.state = {
           loading: true
         };
+        var today = new Date();
+        var dd = today.getDate();
+        
+        var mm = today.getMonth()+1; 
+        var yyyy = today.getFullYear();
+
+        this.date = dd+'-'+mm+'-'+yyyy;
       }
 
     render() {
         return (
             <React.Fragment>
-                <h2 className="display-4 my-3">UK Carbon Data for today</h2>
-                
+
+                <h2 className="display-4 my-3">UK Carbon Data</h2>
+                <p>Date: {this.date}</p>
                 <ColourCodes/>
                 <Query query={CARBON_DATA_QUERY}>
                     {
