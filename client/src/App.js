@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { CarbonData } from "./components/CarbonData";
 import { ApolloClient, ApolloProvider, InMemoryCache }  from '@apollo/client';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import logo from './logo.jpg';
+import CarbonData from './components/Carbondata.ts';
 
 const client = new ApolloClient({
   uri : '/graphql',
@@ -19,6 +19,7 @@ function App() {
           alt="carbon" 
           style={{ width:300, display: 'block', margin: 'auto', borderRadius: 200, padding: 20}}></img>
           <Route exact path="/" component={CarbonData} />
+          <Route exact path="/region/:regionid" component={CarbonData} />
           </div>
       </Router>
     </ApolloProvider>

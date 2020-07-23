@@ -4,7 +4,7 @@ import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLSchem
 import { CarbonDataNationalObject } from "./carbondatanational";
 import { CarbonDataObject } from "./carbondata";
 import { GenerationMixObject } from "./generationmix";
-import { RegionalCarbonDataObject } from "./regionalcarbondata";
+import { RegionalCarbonDataObject, RegionalCarbonDataObjectSingle } from "./regionalcarbondata";
 
 
 
@@ -59,17 +59,31 @@ const RootQuery = new GraphQLObjectType({
               });
           }
         },
-        RegionalCarbonData: {
-            type: RegionalCarbonDataObject,
-            resolve(parent, args) {
-                return axios
-                .get("https://api.carbonintensity.org.uk/regional")
-                .then((res:any) => {
-                    //console.log(res.data)
-                    return res.data
-                });
+      RegionalCarbonData: {
+          type: RegionalCarbonDataObject,
+          resolve(parent, args) {
+            return axios
+              .get("https://api.carbonintensity.org.uk/regional")
+              .then((res:any) => {
+                  //console.log(res.data)
+                  return res.data
+              });
             }
-            }
+      },
+      RegionalCarbonDataById: {
+        type: RegionalCarbonDataObjectSingle,
+        args: {
+          regionid: { type: GraphQLInt },
+        },
+        resolve(parent, args) {
+          return axios
+            .get(`https://api.carbonintensity.org.uk/regional/regionid/${args.regionid}`)
+            .then((res:any) => {
+                //console.log(res.data)
+                return res.data
+            });
+          }
+    }
   }
 });
 

@@ -1,4 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLFloat } from "graphql";
+import { GenerationMixObject } from "./generationmix";
 
 const GenerationMix = new GraphQLObjectType({
   name: 'regional_generation_mix',
@@ -16,14 +17,23 @@ const CarbonIntensity = new GraphQLObjectType({
     })
   })
 
+const RegionIntensity = new GraphQLObjectType({
+  name: 'region_intensity',
+  fields: () => ({
+    intensity: { type: CarbonIntensity },
+    generationmix: { type: GraphQLList(GenerationMix)},
+    to: { type: GraphQLString },
+    from: { type: GraphQLString }
+  })
+})
+  
 const Region = new GraphQLObjectType({
   name: 'region',
   fields: () => ({
     regionid: { type: GraphQLInt },
     dnoregion: { type: GraphQLString },
     shortname: { type: GraphQLString },
-    intensity: { type: CarbonIntensity },
-    generationmix: { type: new GraphQLList(GenerationMix) }
+    data: { type: GraphQLList(RegionIntensity) }
   })
 })
 
@@ -44,3 +54,10 @@ export const RegionalCarbonDataObject = new GraphQLObjectType({
       data: { type: new GraphQLList(RegionalCarbonData) }
     })
   });
+
+export const RegionalCarbonDataObjectSingle = new GraphQLObjectType({
+  name: 'regional_carbon_data_single',
+  fields: () => ({
+    data: { type: new GraphQLList(Region) }
+  })
+});
