@@ -26,7 +26,37 @@ const RegionIntensity = new GraphQLObjectType({
     from: { type: GraphQLString }
   })
 })
+
+// regions {
+//   regionid
+//   dnoregion
+//   shortname
+//   intensity {
+//     index
+//   }
+//   generationmix {
+//     fuel
+//     perc
+//   }
+// }
+
+const GeneralIntensity = new GraphQLObjectType({
+  name: 'general_intensity',
+  fields: () => ({
+    index: { type: GraphQLString}
+  })
+})
   
+const RegionGeneral = new GraphQLObjectType({
+  name: 'region_general',
+  fields: () => ({
+    regionid: { type: GraphQLInt },
+    dnoregion: { type: GraphQLString },
+    shortname: { type: GraphQLString },
+    intensity: { type: GeneralIntensity }
+  })
+})
+
 const Region = new GraphQLObjectType({
   name: 'region',
   fields: () => ({
@@ -42,7 +72,7 @@ const RegionalCarbonData = new GraphQLObjectType({
     fields: () => ({
       from: { type: GraphQLString },
       to: { type: GraphQLString },
-      regions: { type: new GraphQLList(Region) }
+      regions: { type: new GraphQLList(RegionGeneral) }
     })
   })
   

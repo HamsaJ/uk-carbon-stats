@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom';
 
 export const Region = ({
     region: { regionid, dnoregion, shortname, intensity }
@@ -21,7 +22,9 @@ export const Region = ({
             </h4>
           </div>
           <div className="col-md-3">
-              <button className="btn btn-secondary">Details</button>
+          <Link to={`/region/${regionid}`} className="btn btn-secondary">
+            Details
+          </Link>
           </div>
         </div>
       </div>

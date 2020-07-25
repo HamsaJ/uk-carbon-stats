@@ -16,25 +16,21 @@ const override = css`
 
 const CARBON_DATA_QUERY = gql`
 query {
-    RegionalCarbonData {
-      data {
-        to
-        from
-        regions {
-          regionid
-          dnoregion
-          shortname
-          intensity {
-            index
-          }
-          generationmix {
-            fuel
-            perc
-          }
+  RegionalCarbonData {
+    data {
+      to
+      from
+      regions {
+        regionid
+        dnoregion
+        shortname
+        intensity{
+          index
         }
       }
     }
   }
+}
   
 `
 
